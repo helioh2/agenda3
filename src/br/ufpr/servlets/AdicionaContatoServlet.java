@@ -2,14 +2,19 @@ package br.ufpr.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import br.ufpr.dao.ContatoDao;
+import br.ufpr.modelo.Contato;
 
 /**
  * Servlet implementation class AdicionaContatoServlet
@@ -37,9 +42,24 @@ public class AdicionaContatoServlet extends HttpServlet {
 		out.println("Endereco: "+endereco);
 		out.println("Data Nascimento: "+dataNascimentoTexto);
 		
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/aaaa");
-		//Calendar dataNascimento = new Calendar(format.parse(dataNascimentoTexto).getTime());
+		Calendar dataNascimento = Calendar.getInstance();
+		try {
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			
+			Date data1;
+			data1 = format.parse(dataNascimentoTexto);
+			dataNascimento.setTime(data1);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		ContatoDao dao  = new ContatoDao();
+		dao.adiciona(new Contato(nome, endereco, email, dataNascimento));
+		
 		//System.out.println(dataNascimento);
+		out.println(nome+" adicionado com sucesso!");
 		
 		
 	}

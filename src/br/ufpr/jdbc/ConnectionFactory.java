@@ -9,9 +9,13 @@ public class ConnectionFactory {
 	
 	public Connection getConnection() {
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			return DriverManager
 					.getConnection("jdbc:mysql://localhost/agenda", "root", "root");
 		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
