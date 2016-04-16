@@ -45,13 +45,12 @@ public class AdicionaContatoServlet extends HttpServlet {
 		Calendar dataNascimento = Calendar.getInstance();
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-			
-			Date data1;
-			data1 = format.parse(dataNascimentoTexto);
-			dataNascimento.setTime(data1);
+
+			dataNascimento.setTime(format.parse(dataNascimentoTexto));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new ServletException();
 		}
 		
 		
