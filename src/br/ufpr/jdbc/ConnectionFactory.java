@@ -11,7 +11,7 @@ public class ConnectionFactory {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			return DriverManager
-					.getConnection("jdbc:mysql://localhost/agenda", "root", "ROOT");
+					.getConnection("jdbc:mysql://localhost/agenda", "root", "root");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

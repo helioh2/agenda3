@@ -55,7 +55,7 @@ public class AdicionaContatoServlet extends HttpServlet {
 		
 		
 		ContatoDao dao  = new ContatoDao();
-		dao.adiciona(new Contato(nome, endereco, email, dataNascimento));
+		dao.adiciona(new Contato(nome, email, endereco, dataNascimento));
 		
 		//System.out.println(dataNascimento);
 		out.println(nome+" adicionado com sucesso!");
