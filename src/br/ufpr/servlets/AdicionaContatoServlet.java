@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,12 +37,7 @@ public class AdicionaContatoServlet extends HttpServlet {
 		String endereco = request.getParameter("endereco");
 		String dataNascimentoTexto = request.getParameter("dataNascimento");
 		
-		PrintWriter out = response.getWriter();
-		out.println("Nome: "+nome);
-		out.println("Email: "+email);
-		out.println("Endereco: "+endereco);
-		out.println("Data Nascimento: "+dataNascimentoTexto);
-		
+	
 		Calendar dataNascimento = Calendar.getInstance();
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -57,8 +53,10 @@ public class AdicionaContatoServlet extends HttpServlet {
 		ContatoDao dao  = new ContatoDao();
 		dao.adiciona(new Contato(nome, email, endereco, dataNascimento));
 		
-		//System.out.println(dataNascimento);
-		out.println(nome+" adicionado com sucesso!");
+		
+		//Redireciona
+		RequestDispatcher rd = request.getRequestDispatcher("/contato-adicionado.jsp");
+		rd.forward(request, response);
 		
 		
 	}
