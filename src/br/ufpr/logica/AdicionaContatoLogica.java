@@ -36,7 +36,7 @@ public class AdicionaContatoLogica implements Logica{
 		ContatoDao dao  = new ContatoDao();
 		dao.adiciona(new Contato(nome, email, endereco, dataNascimento));
 		
-		return "contato-adicionado.jsp";
+		return "/WEB-INF/jsp/contato-adicionado.jsp";
 		
 	}
 

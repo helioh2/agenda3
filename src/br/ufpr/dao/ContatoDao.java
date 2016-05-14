@@ -49,6 +49,7 @@ public class ContatoDao {
 			List<Contato> contatos = new ArrayList<Contato>();
 			while (rs.next()) {
 				Contato contato = new Contato();
+				contato.setId(rs.getLong("id"));
 				contato.setNome(rs.getString("nome"));
 				contato.setEmail(rs.getString("email"));
 				contato.setEndereco(rs.getString("endereco"));
@@ -72,6 +73,25 @@ public class ContatoDao {
 		Calendar dataNascimento = Calendar.getInstance();
 		dataNascimento.setTime(dataNascimentoDate);
 		contato.setDataNascimento(dataNascimento);
+	}
+
+	public void remove(Contato contato) {
+		String sql = "delete from contatos where id=?";
+
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setLong(1, contato.getId());
+			
+			// executa
+			stmt.execute();
+			stmt.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
 	}
 
 }
