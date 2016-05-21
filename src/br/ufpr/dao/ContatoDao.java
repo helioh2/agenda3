@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.ufpr.jdbc.ConnectionFactory;
+import br.ufpr.jdbc.MysqlConnectionFactory;
 import br.ufpr.modelo.Contato;
 
 public class ContatoDao {
 
 	private Connection connection;
 
-	public ContatoDao() {
-		this.connection = new ConnectionFactory().getConnection();
+	public ContatoDao(Connection connection) {
+		this.connection = connection;
 	}
 
 	public void adiciona(Contato contato) {

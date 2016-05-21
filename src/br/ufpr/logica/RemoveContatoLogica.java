@@ -1,5 +1,7 @@
 package br.ufpr.logica;
 
+import java.sql.Connection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +18,8 @@ public class RemoveContatoLogica implements Logica {
 		Contato contato = new Contato();
 		contato.setId(id);
 		
-		ContatoDao dao = new ContatoDao();
+		Connection conexao = (Connection) request.getAttribute("conexao");
+		ContatoDao dao  = new ContatoDao(conexao);
 		dao.remove(contato);
 
 		return "mvc?logica=ListaContatosLogica";

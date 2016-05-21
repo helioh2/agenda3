@@ -1,5 +1,6 @@
 package br.ufpr.logica;
 
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,8 +33,8 @@ public class AdicionaContatoLogica implements Logica{
 			throw new ServletException();
 		}
 		
-		
-		ContatoDao dao  = new ContatoDao();
+		Connection conexao = (Connection) request.getAttribute("conexao");
+		ContatoDao dao  = new ContatoDao(conexao);
 		dao.adiciona(new Contato(nome, email, endereco, dataNascimento));
 		
 		return "/WEB-INF/jsp/contato-adicionado.jsp";
